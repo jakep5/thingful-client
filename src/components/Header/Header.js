@@ -2,12 +2,19 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import TokenService from '../../services/token-service'
+import ThingContext from '../../contexts/ThingContext'
 import './Header.css'
 
 export default class Header extends Component {
+
+  static contextType = ThingContext
+
   handleLogoutClick = () => {
-    
+    TokenService.clearAuthToken();
+    this.context.mustLogIn();
   }
+
+
 
   renderLogoutLink() {
     return (
