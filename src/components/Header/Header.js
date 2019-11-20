@@ -14,6 +14,9 @@ export default class Header extends Component {
     this.context.mustLogIn();
   }
 
+  handleLoginClick = () => {
+    this.context.handleLoginClick();
+  }
 
 
   renderLogoutLink() {
