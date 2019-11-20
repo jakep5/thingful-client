@@ -9,6 +9,7 @@ const ThingContext = React.createContext({
   thing: nullThing,
   reviews: [],
   error: null,
+  mustLogIn: false,
   setError: () => {},
   clearError: () => { },
   setThing: () => {},
@@ -24,6 +25,18 @@ export class ThingProvider extends Component {
     thing: nullThing,
     error: null,
   };
+
+  mustLogIn = () => {
+    this.setState({
+      mustLogIn: true
+    })
+  }
+
+  handleLogIn = () => {
+    this.setState({
+      mustLogIn: false
+    })
+  }
 
   setError = error => {
     console.error(error)
@@ -65,6 +78,9 @@ export class ThingProvider extends Component {
       setReviews: this.setReviews,
       clearThing: this.clearThing,
       addReview: this.addReview,
+      mustLogIn: this.mustLogIn,
+      mustLogInState: this.state.mustLogIn,
+      handleLogIn: this.handleLogIn
     }
     return (
       <ThingContext.Provider value={value}>

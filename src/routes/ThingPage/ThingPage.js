@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ThingContext from '../../contexts/ThingContext'
 import ThingApiService from '../../services/thing-api-service'
 import { Hyph, Section } from '../../components/Utils/Utils'
 import { ThingStarRating } from '../../components/ThingStarRating/ThingStarRating'
 import ReviewForm from '../../components/ReviewForm/ReviewForm'
+import TokenService from '../../services/token-service'
 import './ThingPage.css'
 
 export default class ThingPage extends Component {
@@ -42,15 +44,14 @@ export default class ThingPage extends Component {
 
   render() {
     const { error, thing } = this.context
-    let content
-    if (error) {
+    let content = this.renderThing()
+    if (!TokenService.getAuthToken()) {
+      this.context.mustLogIn()
+      return <Redirect to="/login" />
+    } else if (error) {
       content = (error.error === `Thing doesn't exist`)
         ? <p className='red'>Thing not found</p>
         : <p className='red'>There was an error</p>
-    } else if (!thing.id) {
-      content = <div className='loading' />
-    } else {
-      content = this.renderThing()
     }
     return (
       <Section className='ThingPage'>
