@@ -14,7 +14,7 @@ export default class Header extends Component {
     this.context.mustLogIn();
   }
 
-  handleLoginClick = () => {
+  handleLoginClick = (e) => {
     this.context.handleLoginClick();
   }
 
@@ -23,7 +23,7 @@ export default class Header extends Component {
     return (
       <div className='Header__logged-in'>
         <Link
-          onClick={this.handleLogoutClick}
+          onClick={e => this.handleLogoutClick(e)}
           to='/'>
           Logout
         </Link>
