@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Input, Required } from '../Utils/Utils'
-import { Link } from 'react-router-dom'
+import { Link } from 'react'
 import AuthApiService from '../../services/auth-api-service'
 
 export default class RegistrationForm extends Component {
@@ -87,11 +87,9 @@ export default class RegistrationForm extends Component {
             id='RegistrationForm__nick_name'>
           </Input>
         </div>
-        <Link to='/'>
-          <Button type='submit'>
-            Register
-          </Button>
-        </Link>
+        <Button type='submit'>
+          Register
+        </Button>
       </form>
     )
   }
